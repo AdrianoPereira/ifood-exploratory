@@ -52,7 +52,9 @@ def get_menu(restaurant):
     return temp
 
 def telegram_bot_sendtext(bot_message):
-    bot_token = '759857343:AAF7IjXp92TDg2krMfXl43IpHpYwEchLhxk'
+    with open('authentication', 'r') as file:
+        lines = file.readlines()
+        bot_token = lines[2].replace('\n', '').split('=')[1]
     bot_chatID = '-1001427930264'
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 
@@ -87,10 +89,10 @@ if __name__ == "__main__":
     dataloc = json.loads(r.text)
     locationId = dataloc['data']['locations'][0]['locationId']
 
-    restaurants = get_restaurants(CEP)
+    # restaurants = get_restaurants(CEP)
     # print(restaurants)
     MSG = '=-----Lista do Xadrez, By Seu Companheiro Lula-----=\n'
-    # print(restaurants['data']['list'][0].keys())
+    print(restaurants['data']['list'][0].keys())
 
     for restaurant in restaurants['data']['list']:
         if restaurant['closed'] == False:
@@ -99,5 +101,5 @@ if __name__ == "__main__":
             MSG += '\n'
 
     print(MSG)
-    # print(telegram_bot_sendtext(str(MSG[:2000])))
+    print(telegram_bot_sendtext(str(MSG[:4000])))
 #
