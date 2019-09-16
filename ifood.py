@@ -89,7 +89,7 @@ if __name__ == "__main__":
     dataloc = json.loads(r.text)
     locationId = dataloc['data']['locations'][0]['locationId']
 
-    # restaurants = get_restaurants(CEP)
+    restaurants = get_restaurants(CEP)
     # print(restaurants)
     MSG = '=-----Lista do Xadrez, By Seu Companheiro Lula-----=\n'
     print(restaurants['data']['list'][0].keys())
